@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>{{ title }}</title>
+    <link href="{% static 'store/css/auth.css' %}" rel="stylesheet"/>
+
+
+</head>
+<body class="bg-primary">
+<div id="layoutAuthentication">
+    <div id="layoutAuthentication_content">
+        {% block content %} {% endblock %}
+    </div>
+</div>
+
+
+<script src="{% static 'store/js/auth-admin.js' %}"></script>
+</body>
+</html>

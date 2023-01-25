@@ -1,0 +1,37 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <form action="{% url 'send_spam' %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-md-7">
+                        <!-- Billing Details -->
+                        <div class="billing-details">
+                            <div class="section-title">
+                                <h3 class="title">Заполните форму</h3>
+                            </div>
+                            <div class="form-group">
+                                {{ form.first_name }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.last_name }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="add-to-cart">
+                                <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Подписаться
+                                </button>
+                            </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

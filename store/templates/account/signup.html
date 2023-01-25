@@ -1,0 +1,83 @@
+{% extends 'store/base_user.html' %}
+
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                {% if form.errors %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                     style="margin-top: 50px;">
+                    {{ form.errors }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Создать аккаунт</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label class="small mb-1">
+                                        Имя пользователя
+                                    </label>
+                                    <input class="form-control py-4" type="text" name="username" placeholder="Имя пользователя" autocomplete="username" minlength="1" maxlength="150" required="" id="id_username">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="small mb-1">
+                                        Адрес электронной почты
+                                    </label>
+                                    <input class="form-control py-4" type="email" name="email" placeholder="Почта" autocomplete="new-password" required="" id="id_password1">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="small mb-1">
+                                            Пароль
+                                        </label>
+                                        <input class="form-control py-4" type="password" name="password1" placeholder="Пароль" autocomplete="new-password" required="" id="id_password1">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="small mb-1">
+                                            Подтверждение пароля
+                                        </label>
+                                        <input class="form-control py-4" type="password" name="password2" placeholder="Пароль (еще раз)" autocomplete="new-password" required="" id="id_password2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4 mb-0">
+                                <input class="btn btn-primary btn-block" type="submit" value="Создать аккаунт">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="small">
+                            <a href="{% url 'account_login' %}">
+                                Уже есть аккаунт? Авторизоваться
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

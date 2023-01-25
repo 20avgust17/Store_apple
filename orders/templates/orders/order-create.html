@@ -1,0 +1,110 @@
+{% extends 'orders/base_order.html' %}
+{% load static %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <!-- SECTION -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <form action="{% url 'orders:order_create' %}" method="post">
+                        {% csrf_token %}
+                        <div class="col-md-7">
+                            <!-- Billing Details -->
+                            <div class="billing-details">
+                                <div class="section-title">
+                                    <h3 class="title">Заполните форму</h3>
+                                </div>
+                                <div class="form-group">
+                                    {{ form.first_name }}
+                                </div>
+                                <div class="form-group">
+
+                                    {{ form.last_name }}
+                                </div>
+                                <div class="form-group">
+
+                                    {{ form.email }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form.address }}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Order Details -->
+                        <div class="col-md-5 order-details">
+                            <div class="section-title text-center">
+                                <h3 class="title">Твой заказ</h3>
+                            </div>
+                            <div class="order-summary">
+                                <div class="order-col">
+                                    <div><strong>Продукт</strong></div>
+                                    <div><strong>Цена всего</strong></div>
+                                </div>
+                                {% for basket in baskets %}
+                                    <div class="order-products">
+                                    <div class="order-col">
+                                        <div><a href="{% url 'basket_remove' basket.id %}">X</a> {{ basket.quantity }}x
+                                            - {{ basket.product.title }}</div>
+                                        <div>{{ basket.sum }}</div>
+                                    </div>
+                                {% endfor %}
+                                </div>
+                                <div class="order-col">
+                                    <div>Цена доставки</div>
+                                    <div><strong>По тарифам новой почты</strong></div>
+                                    {{ basket.sum }}
+                                </div>
+                                <div class="order-col">
+                                    <div><strong>ИТОГО</strong></div>
+                                    <div><strong class="order-total">{{ baskets.total_sum }}</strong></div>
+                                </div>
+                            </div>
+                            <div class="payment-method">
+                                <div class="input-radio">
+                                    <input type="radio" name="payment" id="payment-1">
+                                    <div class="input-radio">
+                                        <input type="radio" name="payment" id="payment-2">
+                                        <label for="payment-2">
+                                            <span></span>
+                                            Наложный платеж
+                                        </label>
+                                        <div class="caption">
+                                            <p>Сейчас работает оплата банковской карточкой. В будущем мы добавим
+                                                наложный
+                                                платеж, ожидайте обновлений!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-checkbox">
+                                <input type="checkbox" id="terms">
+                                <label for="terms">
+                                    <span></span>
+                                    Вы согласны с правилами потребителя?<a href="#"></a>
+                                </label>
+                            </div>
+                            <div class="add-to-cart">
+                                <button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add
+                                    to cart
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /Order Details -->
+                </div>
+                <!-- /row -->
+            </div>
+        </div>
+        <!-- /container -->
+    {% else %}
+        <h3 style="padding-left: 460px; padding-top: 50px">Для просмотра корзины вам стоит <a
+                href="{% url 'account_login' %}">авторизоваться</a> или <a href="{% url 'account_signup' %}">зарегистрироваться</a>
+        </h3>
+    {% endif %}
+    <!-- /SECTION -->
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'store/base_user.html' %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+
+{% block content %}
+
+{% get_providers as socialaccount_providers %}
+
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5">
+                {% if messages or form.non_field_errors %}
+                <div class="alert
+                         alert-dismissible fade show" role="alert"
+                     style="margin-top: 50px;">
+                    {{ form.non_field_errors }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Авторизация</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    Имя пользователя
+                                </label>
+                                <input class="form-control py-4" type="text" name="login" placeholder="Имя пользователя" autocomplete="username" maxlength="150" required="" id="id_login">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Пароль
+                                </label>
+                                <input class="form-control py-4" type="password" name="password" placeholder="Пароль" autocomplete="current-password" required="" id="id_password">
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <a class="small" href="#">Забыли пароль?</a>
+                                <input class="btn btn-primary" type="submit" value="Авторизоваться">
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <a href="/accounts/google/login/?process=login">
+                                    <i class="fab fa-google fa-2x" style="color: #d9503e;"></i>
+                                </a>
+                                <a href="/accounts/github/login/?process=login">
+                                    <i class="fab fa-github fa-2x" style="color: #303030;"></i>
+                                </a>
+                                <a href="#">
+                                    <i class="fab fa-facebook fa-2x" style="color: #405794;"></i>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="small"><a href="/accounts/signup/">Нужен аккаунт?
+                            Зарегистрируйся!</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% endblock %}

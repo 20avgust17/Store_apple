@@ -1,0 +1,279 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <h2>Новые продукты</h2>
+                <!-- Products tab & slick -->
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="products-tabs">
+                            <!-- tab -->
+                            <div id="tab1" class="tab-pane active">
+                                <div class="products-slick" data-nav="#slick-nav-1">
+                                    {% for product in new_products %}
+                                        <div class="product">
+                                            <div class="product-img">
+                                                <img src="{{ product.photo.url }}" alt="">
+                                                <div class="product-label">
+                                                    <span class="new">NEW</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-body">
+                                                <p class="product-category">{{ product.category }}</p>
+                                                <h3 class="product-name"><a
+                                                        href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                                                </h3>
+                                                <h4 class="product-price">  {{ product.price }} ГРН
+                                                    <del class="product-old-price"> {{ product.price|add:400 }}</del>
+                                                </h4>
+                                                <div class="product-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a href="{% url 'basket_add' product.id %}">
+                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
+                                                        Добавить в корзину
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div id="slick-nav-1" class="products-slick-nav"></div>
+                            </div>
+                            <!-- /tab -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Products tab & slick -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- HOT DEAL SECTION -->
+    <div id="hot-deal" class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hot-deal">
+                        <ul class="hot-deal-countdown">
+                            <li>
+                                <div>
+                                    <h3>02</h3>
+                                    <span>Days</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <h3>10</h3>
+                                    <span>Hours</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <h3>34</h3>
+                                    <span>Mins</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <h3>60</h3>
+                                    <span>Secs</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <h2 class="text-uppercase">hot deal this week</h2>
+                        <p>New Collection Up to 50% OFF</p>
+                        <a class="primary-btn cta-btn" href="#">Shop now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /HOT DEAL SECTION -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <!-- section title -->
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h3 class="title">Лучший рейтинг</h3>
+                        <div class="section-nav">
+                            <ul class="section-tab-nav tab-nav">
+                                <li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
+                                <li><a data-toggle="tab" href="#tab2">Iphone</a></li>
+                                <li><a data-toggle="tab" href="#tab2">Ipad</a></li>
+                                <li><a data-toggle="tab" href="#tab2">Macbook</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /section title -->
+
+                <!-- Products tab & slick -->
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="products-tabs">
+                            <!-- tab -->
+                            <div id="tab2" class="tab-pane fade in active">
+                                <div class="products-slick" data-nav="#slick-nav-2">
+                                    <!-- product -->
+                                    {% for product in top_rating_products %}
+                                        <div class="product">
+                                            <div class="product-img">
+                                                <img href="{{ g }}" src="{{ product.photo.url }}" alt="">
+                                                <div class="product-label">
+                                                    <span class="new">NEW</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-body">
+                                                <p class="product-category">{{ product.category }}</p>
+                                                <h3 class="product-name"><a
+                                                        href="{{ product.get_absolute_url }}">{{ product.title }}</a>
+                                                </h3>
+                                                <h4 class="product-price">{{ product.price }} ГРН
+                                                    <del class="product-old-price">{{ product.price|add:490 }}</del>
+                                                </h4>
+                                                <div class="product-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <a href="{% url 'basket_add' product.id %}">
+                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
+                                                        Добавить в корзину
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <!-- /product -->
+                                </div>
+                                <div id="slick-nav-2" class="products-slick-nav"></div>
+                            </div>
+                            <!-- /tab -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /Products tab & slick -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-4 col-xs-6">
+                    <div class="section-title">
+                        <h4 class="title">Дорогие товары</h4>
+                        <div class="section-nav">
+                            <div id="slick-nav-3" class="products-slick-nav"></div>
+                        </div>
+                    </div>
+                    {% for product in top_price_products %}
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="{{ product.photo.url }}" alt="фото">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">{{ product.category }}</p>
+                                <h3 class="product-name"><a
+                                        href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
+                                <h4 class="product-price">{{ product.price }} ГРН
+                                    <del class="product-old-price">{{ product.price|add:"650"  }}</del>
+                                </h4>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+                <div class="col-md-4 col-xs-6">
+                    <div class="section-title">
+                        <h4 class="title">Желанные товары</h4>
+                        <div class="section-nav">
+                            <div id="slick-nav-4" class="products-slick-nav"></div>
+                        </div>
+                    </div>
+                    {% for product in top_like_products %}
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="{{ product.photo.url }}" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">{{ product.category }}</p>
+                                <h3 class="product-name"><a
+                                        href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
+                                <h4 class="product-price">{{ product.price }} ГРН
+                                    <del class="product-old-price">{{ product.price|add:"650" }}</del>
+                                </h4>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-4 col-xs-6">
+                    <div class="section-title">
+                        <h4 class="title">Товары в наличии</h4>
+                        <div class="section-nav">
+                            <div id="slick-nav-5" class="products-slick-nav"></div>
+                        </div>
+                    </div>
+                    {% for product in top_presence_product %}
+                        <div class="product-widget">
+                            <div class="product-img">
+                                <img src="{{ product.photo.url }}" alt="">
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">{{ product.category }}</p>
+                                <h3 class="product-name"><a
+                                        href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
+                                <h4 class="product-price">{{ product.price }} ГРН
+                                    <del class="product-old-price">{{ product.price|add:"650" }}</del>
+                                </h4>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+{% endblock %}

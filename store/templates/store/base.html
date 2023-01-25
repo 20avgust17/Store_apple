@@ -1,0 +1,346 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>{{ title }}</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="{% static 'store/css/bootstrap.min.css' %}"/>
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="{% static 'store/css/slick.css' %}"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'store/css/slick-theme.css' %}"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="{% static 'store/css/nouislider.min.css' %}"/>
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="{% static 'store/css/font-awesome.min.css' %}">
+
+    <!-- Custom stylelesheet -->
+    <link type="text/css" rel="stylesheet" href="{% static 'store/css/style.css' %}"/>
+
+
+</head>
+<body>
+<!-- HEADER -->
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+            <ul class="header-links pull-left">
+                <li><a href="#"><i class="fa fa-phone"></i> +093-798-34-12</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> electro@email.com</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> Киев, Хрещатик 54</a></li>
+            </ul>
+            <ul class="header-links pull-right">
+                <li><a href="#"><i class="fa fa-dollar"></i> ГРН</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' user.id %}"><i class="fa fa-user-o"></i>| Мой аккаунт</a></li>
+                    <li><a href="{% url 'account_logout' %}"><i class="fa fa-user-o"></i>| Выход </a></li>
+                {% else %}
+                    <li><a href="{% url 'account_login' %}"><i class="fa fa-user-o"></i>| Авторизация</a></li>
+                    <li><a href="{% url 'account_signup' %}"><i class="fa fa-user-o"></i>| Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="{% url 'index' %}" class="logo">
+                            <img src="{% static 'store/./img/logo.png' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+
+                <!-- SEARCH BAR -->
+                <div class="col-md-6">
+                    <div class="header-search">
+                        <form action="{% url 'search' %}" method="get" role="search">
+                            <select class="input-select">
+                                <option value="0">Все категории</option>
+                            </select>
+                            <input class="input" placeholder="Search" type="search" name="q">
+                            <button class="search-btn" type="submit">Поиск</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ACCOUNT -->
+                <div class="col-md-3 clearfix">
+                    <div class="header-ctn">
+
+                        <!-- Cart -->
+                        <div class="dropdown">
+                            <a href="{% url 'orders:order_create' %}" class="dropdown-toggle">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>Корзина</span>
+                                <div class="qty">{{ baskets.total_quantity }}</div>
+                            </a>
+
+                            <!-- /Cart -->
+
+                            <!-- Menu Toogle -->
+                            <div class="menu-toggle">
+                                <a href="#">
+                                    <i class="fa fa-bars"></i>
+                                    <span>Menu</span>
+                                </a>
+                            </div>
+                            <!-- /Menu Toogle -->
+
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                {% for category in categories %}
+                    <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
+                {% endfor %}
+            </ul>
+
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- shop -->
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img style="width: 400px" src="{% static 'store/./img/shop01.png' %}" alt="фото">
+                    </div>
+                    <div class="shop-body">
+                        <h3>MacBook<br>Коллекция</h3>
+                        <a href="{% url 'category' 27 %}" class="cta-btn">Смотреть детально<i
+                                class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /shop -->
+
+            <!-- shop -->
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img style="width: 516px" src="{% static 'store/./img/shop02.png' %}" alt="">
+                    </div>
+                    <div class="shop-body">
+                        <h3>Iphone<br>Коллекция</h3>
+                        <a href="{% url 'category' 24 %}" class="cta-btn">Смотреть детально<i
+                                class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /shop -->
+
+            <!-- shop -->
+            <div class="col-md-4 col-xs-6">
+                <div class="shop">
+                    <div class="shop-img">
+                        <img style="width: 267px" src="{% static 'store/./img/shop03.png' %}" alt="">
+                    </div>
+                    <div class="shop-body">
+                        <h3>Аксессуары<br>Коллекция</h3>
+                        <a href="{% url 'category' 26 %}" class="cta-btn">Смотреть детально<i
+                                class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /shop -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+{% block content %}
+
+{% endblock %}
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>Подпишитесь на нашу <strong>Рассылку</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="Enter Your Email">
+                      <a href="{% url 'send_spam' %}"> <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button></a>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://pinterest.com"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- FOOTER -->
+<footer id="footer">
+    <!-- top footer -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Про нас</h3>
+                        <p>Наш магазин предоставляет огромный выбор товаров, компании Apple с гарантией!</p>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fa fa-map-marker"></i>Киев, Хрещашик 54</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>+93-798-43-12</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i>Electro@email.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Категории</h3>
+                        <ul class="footer-links">
+                            <li><a href="{% url 'category' 24 %}">Iphone</a></li>
+                            <li><a href="{% url 'category' 23 %}">Ipad</a></li>
+                            <li><a href="{% url 'category' 25 %}">MacBook</a></li>
+                            <li><a href="{% url 'category' 27 %}">Imac</a></li>
+                            <li><a href="{% url 'category' 26 %}">Аксессуары</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="clearfix visible-xs"></div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Информация</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Про нас</a></li>
+                            <li><a href="#">Контакты</a></li>
+                            <li><a href="#">Политика магазина</a></li>
+                            <li><a href="#">Заказы и возвраты</a></li>
+                            <li><a href="#">Условия</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <div class="footer">
+                        <h3 class="footer-title">Сервис</h3>
+                        <ul class="footer-links">
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url 'profile' user.id %}">Мой аккаунт</a></li>
+                                {% else %}
+                                 <li><a href="{% url 'account_login' %}">Авторизоваться</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'orders:order_create' %}">Посмотреть корзину</a></li>
+                            <li><a href="#">Отслеживать посылку</a></li>
+                            <li><a href="#">Помощь</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /top footer -->
+
+    <!-- bottom footer -->
+    <div id="bottom-footer" class="section">
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <ul class="footer-payments">
+                        <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                        <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                        <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                    </ul>
+                    <span class="copyright">
+								Copyright &copy;<script>document.write(new Date().getFullYear());</script> Все права защищены 2022-2023 <i
+                            class="fa fa-heart-o" aria-hidden="true"></i> от <a href="https://github.com/20avgust17"
+                                                                                target="_blank">20avgust17</a>
+							</span>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bottom footer -->
+</footer>
+<!-- /FOOTER -->
+
+
+<script src="{% static 'store/js/jquery.min.js' %}"></script>
+<script src="{% static 'store/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'store/js/slick.min.js' %}"></script>
+<script src="{% static 'store/js/nouislider.min.js' %}"></script>
+<script src="{% static 'store/js/jquery.zoom.min.js' %}"></script>
+<script src="{% static 'store/js/main.js' %}"></script>
+</body>
+</html>
